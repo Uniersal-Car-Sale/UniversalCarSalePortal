@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mb-2 text-primary">Personal Details</h6>
+                            <h6 class="mb-2 text-primary">Supplier Details</h6>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
@@ -110,7 +110,8 @@
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="text-right">
-                                <button type="button" id="search" name="submit" class="btn btn-secondary">Search</button>
+                                <button type="button" id="search" name="submit" class="btn btn-secondary">Search
+                                </button>
                                 <button type="button" id="update" name="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
@@ -129,23 +130,25 @@
 
 <script>
     $(document).ready(function () {
-        let inputNic = $("#nic").val();
-        $.ajax({
-            type: "GET",
-            url: `http://localhost:8080/api/v1/supplier/${inputNic}`,
-            success: function (data) {
-                console.log(data);
-                $("#fullName").val(data.supName);
-                $("#eMail").val(data.email);
-                $("#Address").val(data.address);
-                $("#nic").val(data.supNic);
-                $("#phone").val(data.contactNo);
-                $("#nameTag").val(data.supName);
-            },
-            error: function (error) {
-                // handle error response here
-                console.log(error);
-            }
+        $("#search").click(function () {
+            let inputNic = $("#nic").val();
+            $.ajax({
+                type: "GET",
+                url: `http://localhost:8080/api/v1/supplier/${inputNic}`,
+                success: function (data) {
+                    console.log(data);
+                    $("#fullName").val(data.supName);
+                    $("#eMail").val(data.email);
+                    $("#Address").val(data.address);
+                    $("#nic").val(data.supNic);
+                    $("#phone").val(data.contactNo);
+                    $("#nameTag").val(data.supName);
+                },
+                error: function (error) {
+                    // handle error response here
+                    console.log(error);
+                }
+            });
         });
     });
 
