@@ -22,8 +22,10 @@
     <div class="container-fluid">
         <a class="navbar-brand"><B>Universal Car Sale</B> </a>
         <form class="d-flex">
-            <a class="btn btn-outline-dark mr-3" href="profile.html" type="submit">Supplier</a>
-            <a class="mr-3 text-secondary btn btn-outline-secondary" style="font-size: 16px;" href="https://www.buymeacoffee.com/saannimeshk"><i
+            <a id="supply" class="btn btn-outline-dark mr-3" href="supplier.html" type="submit">Add Supplier</a>
+            <a id="supplyOp" class="btn btn-outline-dark mr-3" href="supplierFunctions.html" type="submit">Supplier Operations</a>
+            <a class="mr-3 text-secondary btn btn-outline-secondary" style="font-size: 16px;"
+               href="https://www.buymeacoffee.com/saannimeshk"><i
                     class="fa-solid fa-mug-hot"></i></a>
             <a class="mr-3 btn btn-outline-success" href="profile.html" type="submit"><i
                     class="fa-regular fa-user"></i></a>
@@ -31,7 +33,7 @@
         </form>
     </div>
 </nav>
-<section class="container">
+<section id="stats" class="container">
     <div class="boxes row">
         <div class="col-md-3">No of customers : <br/><B> 37</B></div>
         <div class="col-md-3">No of login attempts today : <br/> <B>19</B></div>
@@ -45,6 +47,7 @@
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+
 <script>
     $(document).ready(function () {
         let test = document.getElementById('test');
@@ -63,13 +66,11 @@
         <img class="mr-3" id="image" src="${arr['img1']}" alt="Car image">
         <div>
             <h2 class="product-title" id="title" property="texst">${arr['title']}</h2>
-
             <p class="product-price" id="price">${arr['price']}</p>
             <ul class="product-details d-flex">
                 <div class="mr-3">
                     <li id="mileage">Mileage: ${arr['mileage']}</li>
                     <li id="location">Location: ${arr['location']}</li>
-
                 </div>
                 <div class="mr-3">
                     <li id="engine">Engine: ${arr['capacity']}</li>
@@ -82,9 +83,7 @@
             <a href="${arr['urlLink']}" id="chat" class="product-btn">Contact Vendor</a>
         </div>
     </div>
-
 </section>
-
         `
                 }
             },
@@ -95,6 +94,22 @@
         });
     });
 </script>
+
+<form class="d-flex">
+    <section class="container mt-4">
+        <div class="product-card d-flex">
+            <H3><b>Interested to find more adds ?? <br>
+                please click a site as your wish!!</br></H3>
+            <a class="btn btn-outline-dark mr-3" href="https://ikman.lk/en/ads?query=car" type="submit">ikman.lk</a>
+            <a class="btn btn-outline-dark mr-3" href="https://www.patpat.lk/vehicle/car" type="submit">patpat.lk</a>
+            <a class="btn btn-outline-dark mr-3" href="https://riyasewana.com/search/cars"
+               type="submit">riyasewana.com</a>
+        </div>
+
+    </section>
+    <hr>
+
+</form>
 </body>
 
 </html>
