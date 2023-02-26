@@ -32,8 +32,8 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" id="login" class="form-control btn btn-primary submit px-3">
-								<a href="./home.html" class="px-2 py-2 mr-md-1 rounded">Login</a>
-							</button>
+                                <a href="./home.html" class="px-2 py-2 mr-md-1 rounded">Login</a>
+                            </button>
                         </div>
                         <div class="form-group d-md-flex">
                             <div class="w-50">
@@ -62,25 +62,33 @@
 <script src="js/main.js"></script>
 
 <script>
-	$(document).ready(function () {
-		$("#login").click(function () {
-			let userName = $("#userName").val();
-			let password = $("#password").val();
-			$.ajax({
-				type: "GET",
-				url: `http://localhost:8080/api/v1/auth/userName/${userName}/password/${password}`,
-				success: function (data) {
-					console.log(data);
+    $("#login").click(function () {
+        let userName = $("#fullName-field").val();
+        console.log(userName);
+        localStorage.setItem("myDynamicValue", userName);
+    });
+</script>
 
-				},
-				error: function (error) {
-					// handle error response here
-					console.log(error);
-				}
-			});
-		});
-	});
+<script>
+    $(document).ready(function () {
 
+        $("#login").click(function () {
+            let userName = $("#userName").val();
+            let password = $("#password").val();
+            $.ajax({
+                type: "GET",
+                url: `http://localhost:8080/api/v1/auth/userName/${userName}/password/${password}`,
+                success: function (data) {
+                    console.log(data);
+
+                },
+                error: function (error) {
+                    // handle error response here
+                    console.log(error);
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>
