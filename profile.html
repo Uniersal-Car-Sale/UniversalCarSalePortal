@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand">Web Car</a>
+        <a class="navbar-brand">Universal Car Sale</a>
         <form class="d-flex">
             <a class="btn btn-outline-success" href="home.html" type="">Home</a>
         </form>
@@ -30,7 +30,13 @@
                                         alt="Maxwell Admin"
                                 />
                             </div>
-                            <h5 class="user-name">Full Name</h5>
+                            <h5 class="user-name">
+                                <input type="text"
+                                       class="form-control"
+                                       id="fullNameTag"
+                                       placeholder="Enter full name"
+                                />
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -137,6 +143,7 @@
                 $("#Address").val(data.address);
                 $("#nic").val(data.nic);
                 $("#phone").val(data.contactNo);
+                $("#fullNameTag").val(data.cusName);
             },
             error: function (error) {
                 // handle error response here
