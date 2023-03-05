@@ -87,9 +87,97 @@
         `
                 }
             },
-            error: function (error) {
-                // handle error response here
-                console.log(error);
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        let test = document.getElementById('test');
+
+        $.ajax({
+            type: "GET",
+            url: `https://riyasewana-api.azurewebsites.net/api/v1/vehicles/`,
+            success: function (data) {
+                console.log(data.body);
+
+                for (let i = 0; i < data.body.length; i++) {
+                    let arr = data.body[i];
+                    test.innerHTML += `
+        <section class="container mt-4">
+    <div class="product-card d-flex">
+        <img class="mr-3" id="image" src="${arr['img1']}" alt="Car image">
+        <div>
+            <h2 class="product-title" id="title" property="texst">${arr['title']}</h2>
+            <p class="product-price" id="price">${arr['price']}</p>
+            <ul class="product-details d-flex">
+                <div class="mr-3">
+                    <li id="mileage">Mileage: ${arr['mileage']}</li>
+                    <li id="location">Location: ${arr['location']}</li>
+                </div>
+                <div class="mr-3">
+                    <li id="engine">Engine: ${arr['capacity']}</li>
+                    <li id="transmission">Transmission: ${arr['transmission']}</li>
+                </div>
+            </ul>
+        </div>
+        <div>
+            <a href="${arr['urlLink']}" id="productURL" class="product-btn">Buy Now</a>
+            <a href="${arr['urlLink']}" id="chat" class="product-btn">Contact Vendor</a>
+        </div>
+    </div>
+</section>
+        `
+                }
+            },
+            error: function (resp) {
+                console.log(resp);
+                $('#error').toast('show');
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        let test = document.getElementById('test');
+
+        $.ajax({
+            type: "GET",
+            url: `https://patpat-api.azurewebsites.net/api/v1/vehicles/`,
+            success: function (data) {
+                console.log(data.body);
+
+                for (let i = 0; i < data.body.length; i++) {
+                    let arr = data.body[i];
+                    test.innerHTML += `
+        <section class="container mt-4">
+    <div class="product-card d-flex">
+        <img class="mr-3" id="image" src="${arr['img1']}" alt="Car image">
+        <div>
+            <h2 class="product-title" id="title" property="texst">${arr['title']}</h2>
+            <p class="product-price" id="price">${arr['price']}</p>
+            <ul class="product-details d-flex">
+                <div class="mr-3">
+                    <li id="mileage">Mileage: ${arr['mileage']}</li>
+                    <li id="location">Location: ${arr['location']}</li>
+                </div>
+                <div class="mr-3">
+                    <li id="engine">Engine: ${arr['capacity']}</li>
+                    <li id="transmission">Transmission: ${arr['transmission']}</li>
+                </div>
+            </ul>
+        </div>
+        <div>
+            <a href="${arr['urlLink']}" id="productURL" class="product-btn">Buy Now</a>
+            <a href="${arr['urlLink']}" id="chat" class="product-btn">Contact Vendor</a>
+        </div>
+    </div>
+</section>
+        `
+                }
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
             }
         });
     });
@@ -102,8 +190,7 @@
                 please click a site as your wish!!</br></H3>
             <a class="btn btn-outline-dark mr-3" href="https://ikman.lk/en/ads?query=car" type="submit">ikman.lk</a>
             <a class="btn btn-outline-dark mr-3" href="https://www.patpat.lk/vehicle/car" type="submit">patpat.lk</a>
-            <a class="btn btn-outline-dark mr-3" href="https://riyasewana.com/search/cars"
-               type="submit">riyasewana.com</a>
+            <a class="btn btn-outline-dark mr-3" href="https://riyasewana.com/search/cars" type="submit">riyasewana.com</a>
         </div>
 
     </section>
