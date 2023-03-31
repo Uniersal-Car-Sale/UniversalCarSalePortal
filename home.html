@@ -23,7 +23,8 @@
         <a class="navbar-brand"><B>Universal Car Sale</B> </a>
         <form class="d-flex">
             <a id="supply" class="btn btn-outline-dark mr-3" href="supplier.html" type="submit">Add Supplier</a>
-            <a id="supplyOp" class="btn btn-outline-dark mr-3" href="supplierFunctions.html" type="submit">Supplier Operations</a>
+            <a id="supplyOp" class="btn btn-outline-dark mr-3" href="supplierFunctions.html" type="submit">Supplier
+                Operations</a>
             <a class="mr-3 text-secondary btn btn-outline-secondary" style="font-size: 16px;"
                href="https://www.buymeacoffee.com/saannimeshk"><i
                     class="fa-solid fa-mug-hot"></i></a>
@@ -52,15 +53,31 @@
     $(document).ready(function () {
         let test = document.getElementById('test');
 
-        $.ajax({
-            type: "GET",
-            url: `https://ikman-api.azurewebsites.net/api/v1/vehicles/`,
-            success: function (data) {
-                console.log(data.body);
+        Promise.all([
+            $.ajax({
+                type: "GET",
+                url: `https://ikman-api.azurewebsites.net/api/v1/vehicles/`,
+            }),
+            $.ajax({
+                type: "GET",
+                url: `https://riyasewana-api.azurewebsites.net/api/v1/vehicles/`,
+            }),
+            $.ajax({
+                type: "GET",
+                url: `https://patpat-api.azurewebsites.net/api/v1/vehicles/`,
+            })
+        ]).then(function (results) {
+            const data1 = results[0].body;
+            const data2 = results[1].body;
 
-                for (let i = 0; i < data.body.length; i++) {
-                    let arr = data.body[i];
-                    test.innerHTML += `
+            console.log(data1);
+            console.log(data2);
+
+            let dataArray = data1.concat(data2);
+
+            for (let i = 0; i < dataArray.length; i++) {
+                let arr = dataArray[i];
+                test.innerHTML += `
         <section class="container mt-4">
     <div class="product-card d-flex">
         <img class="mr-3" id="image" src="${arr['img1']}" alt="Car image">
@@ -85,102 +102,12 @@
     </div>
 </section>
         `
-                }
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
             }
+        }).catch(function (error) {
+            alert(error);
         });
     });
 
-    $(document).ready(function () {
-        let test = document.getElementById('test');
-
-        $.ajax({
-            type: "GET",
-            url: `https://riyasewana-api.azurewebsites.net/api/v1/vehicles/`,
-            success: function (data) {
-                console.log(data.body);
-
-                for (let i = 0; i < data.body.length; i++) {
-                    let arr = data.body[i];
-                    test.innerHTML += `
-        <section class="container mt-4">
-    <div class="product-card d-flex">
-        <img class="mr-3" id="image" src="${arr['img1']}" alt="Car image">
-        <div>
-            <h2 class="product-title" id="title" property="texst">${arr['title']}</h2>
-            <p class="product-price" id="price">${arr['price']}</p>
-            <ul class="product-details d-flex">
-                <div class="mr-3">
-                    <li id="mileage">Mileage: ${arr['mileage']}</li>
-                    <li id="location">Location: ${arr['location']}</li>
-                </div>
-                <div class="mr-3">
-                    <li id="engine">Engine: ${arr['capacity']}</li>
-                    <li id="transmission">Transmission: ${arr['transmission']}</li>
-                </div>
-            </ul>
-        </div>
-        <div>
-            <a href="${arr['urlLink']}" id="productURL" class="product-btn">Buy Now</a>
-            <a href="${arr['urlLink']}" id="chat" class="product-btn">Contact Vendor</a>
-        </div>
-    </div>
-</section>
-        `
-                }
-            },
-            error: function (resp) {
-                console.log(resp);
-                $('#error').toast('show');
-            }
-        });
-    });
-
-    $(document).ready(function () {
-        let test = document.getElementById('test');
-
-        $.ajax({
-            type: "GET",
-            url: `https://patpat-api.azurewebsites.net/api/v1/vehicles/`,
-            success: function (data) {
-                console.log(data.body);
-
-                for (let i = 0; i < data.body.length; i++) {
-                    let arr = data.body[i];
-                    test.innerHTML += `
-        <section class="container mt-4">
-    <div class="product-card d-flex">
-        <img class="mr-3" id="image" src="${arr['img1']}" alt="Car image">
-        <div>
-            <h2 class="product-title" id="title" property="texst">${arr['title']}</h2>
-            <p class="product-price" id="price">${arr['price']}</p>
-            <ul class="product-details d-flex">
-                <div class="mr-3">
-                    <li id="mileage">Mileage: ${arr['mileage']}</li>
-                    <li id="location">Location: ${arr['location']}</li>
-                </div>
-                <div class="mr-3">
-                    <li id="engine">Engine: ${arr['capacity']}</li>
-                    <li id="transmission">Transmission: ${arr['transmission']}</li>
-                </div>
-            </ul>
-        </div>
-        <div>
-            <a href="${arr['urlLink']}" id="productURL" class="product-btn">Buy Now</a>
-            <a href="${arr['urlLink']}" id="chat" class="product-btn">Contact Vendor</a>
-        </div>
-    </div>
-</section>
-        `
-                }
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-            }
-        });
-    });
 </script>
 
 <form class="d-flex">
@@ -190,7 +117,8 @@
                 please click a site as your wish!!</br></H3>
             <a class="btn btn-outline-dark mr-3" href="https://ikman.lk/en/ads?query=car" type="submit">ikman.lk</a>
             <a class="btn btn-outline-dark mr-3" href="https://www.patpat.lk/vehicle/car" type="submit">patpat.lk</a>
-            <a class="btn btn-outline-dark mr-3" href="https://riyasewana.com/search/cars" type="submit">riyasewana.com</a>
+            <a class="btn btn-outline-dark mr-3" href="https://riyasewana.com/search/cars"
+               type="submit">riyasewana.com</a>
         </div>
 
     </section>
